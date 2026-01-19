@@ -110,8 +110,14 @@ public class InfernoBlobAudioPlugin extends Plugin
 		}
 		
 		String randomAudio = MAIN_AUDIO_FILES[random.nextInt(MAIN_AUDIO_FILES.length)];
-		// AudioPlayer.play(Class source, String path, float gain)
-		audioPlayer.play(getClass(), randomAudio, calculateGain(config.volume()));
+		try
+		{
+			audioPlayer.play(getClass(), randomAudio, calculateGain(config.volume()));
+		}
+		catch (Exception e)
+		{
+			log.warn("Failed to play audio: {}", randomAudio, e);
+		}
 	}
 	
 	private void playChildBlobAudio()
@@ -121,7 +127,14 @@ public class InfernoBlobAudioPlugin extends Plugin
 			return;
 		}
 		
-		audioPlayer.play(getClass(), CHILD_BLOB_AUDIO, calculateGain(config.volume()));
+		try
+		{
+			audioPlayer.play(getClass(), CHILD_BLOB_AUDIO, calculateGain(config.volume()));
+		}
+		catch (Exception e)
+		{
+			log.warn("Failed to play audio: {}", CHILD_BLOB_AUDIO, e);
+		}
 	}
 
 	private float calculateGain(int volume)
