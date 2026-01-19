@@ -28,12 +28,9 @@ Follow this guide to get your plugin on the official RuneLite Plugin Hub.
    - Click the **pencil icon** to edit.
    - Scroll to the bottom and add this single line:
      ```
-     InfernoBlobAudio=https://github.com/<YOUR_USERNAME>/inferno-blob-audio.git:<COMMIT_HASH>
+     InfernoBlobAudio=https://github.com/Deagsly/Blobs.git:64cc4becd036a4c14d54ccc2171ffbcd5d3442be
      ```
-   - **Wait!** You need your `<COMMIT_HASH>`.
-     - Go back to *your* `inferno-blob-audio` repo.
-     - Click the "commits" clock icon.
-     - Copy the long string of numbers/letters for the latest commit (e.g., `8f7a2b...`).
+   - (I have already filled in your Commit Hash above!).
 
 3. **Handle External Dependencies (MP3 Support)**:
    - Since we use MP3 libraries (`mp3spi`, `tritonus`, `jlayer`), you typically need to verify them.

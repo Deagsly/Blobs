@@ -42,15 +42,15 @@ public class InfernoBlobAudioPlugin extends Plugin
 	
 	// Audio files for main blobs (random selection)
 	private static final String[] MAIN_AUDIO_FILES = {
-		"/youre-not-that-guy.mp3",
-		"/akh.mp3",
-		"/fart-with-reverb.mp3",
-		"/kids-saying-yay-sound-effect_3.mp3",
-		"/sad-meow-song.mp3"
+		"youre-not-that-guy.wav",
+		"akh.wav",
+		"fart-with-reverb.wav",
+		"kids-saying-yay-sound-effect_3.wav",
+		"sad-meow-song.wav"
 	};
 	
 	// Specific audio for child blobs
-	private static final String CHILD_BLOB_AUDIO = "/comedy_pop.mp3";
+	private static final String CHILD_BLOB_AUDIO = "comedy_pop.wav";
 
 	@Inject
 	private InfernoBlobAudioConfig config;
@@ -158,31 +158,19 @@ public class InfernoBlobAudioPlugin extends Plugin
 	{
 		try
 		{
-			InputStream audioStream = getClass().getResourceAsStream(audioFile);
+			InputStream audioStream = getClass().getResourceAsStream("/" + audioFile);
 			if (audioStream == null)
 			{
 				log.warn("Could not find audio file: {}", audioFile);
 				return null;
 			}
 			
+			// Must use buffered input stream for mark/reset support
 			BufferedInputStream bufferedStream = new BufferedInputStream(audioStream);
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedStream);
 			
-			// Convert to PCM if needed (for MP3 support)
-			AudioFormat baseFormat = audioInputStream.getFormat();
-			AudioFormat decodedFormat = new AudioFormat(
-				AudioFormat.Encoding.PCM_SIGNED,
-				baseFormat.getSampleRate(),
-				16,
-				baseFormat.getChannels(),
-				baseFormat.getChannels() * 2,
-				baseFormat.getSampleRate(),
-				false
-			);
-			AudioInputStream decodedAudioStream = AudioSystem.getAudioInputStream(decodedFormat, audioInputStream);
-			
 			Clip clip = AudioSystem.getClip();
-			clip.open(decodedAudioStream);
+			clip.open(audioInputStream);
 			
 			log.info("Loaded audio clip: {}", audioFile);
 			return clip;
