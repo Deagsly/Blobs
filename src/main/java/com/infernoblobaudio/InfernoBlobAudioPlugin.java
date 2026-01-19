@@ -110,9 +110,8 @@ public class InfernoBlobAudioPlugin extends Plugin
 		}
 		
 		String randomAudio = MAIN_AUDIO_FILES[random.nextInt(MAIN_AUDIO_FILES.length)];
-		// AudioPlayer.playSound takes (Object source, String path, boolean scheduled, int volume)
-		// Volume 0-100 matches our config.
-		audioPlayer.playSound(this.getClass(), randomAudio, false, config.volume());
+		// AudioPlayer.play(Class source, String path, float gain)
+		audioPlayer.play(getClass(), randomAudio, calculateGain(config.volume()));
 	}
 	
 	private void playChildBlobAudio()
@@ -122,7 +121,16 @@ public class InfernoBlobAudioPlugin extends Plugin
 			return;
 		}
 		
-		audioPlayer.playSound(this.getClass(), CHILD_BLOB_AUDIO, false, config.volume());
+		audioPlayer.play(getClass(), CHILD_BLOB_AUDIO, calculateGain(config.volume()));
+	}
+
+	private float calculateGain(int volume)
+	{
+		if (volume <= 0)
+		{
+			return -80.0f;
+		}
+		return (float) (20.0 * Math.log10(volume / 100.0));
 	}
 
 	@Provides
