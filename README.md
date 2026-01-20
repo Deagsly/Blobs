@@ -12,5 +12,17 @@ Plays "You're not that guy pal" audio when killing Blobs in the Inferno.
 - Adjust volume (0-100%)
 - Enable/Disable sound effects
 
+## Audio Attribution
+All audio files used in this plugin were sourced from [MyInstants](https://www.myinstants.com/en/index/us/), a platform for user-generated sound buttons.
+
+| File | Source |
+|------|--------|
+| `akh.wav` | MyInstants |
+| `comedy_pop.wav` | MyInstants |
+| `fart-with-reverb.wav` | MyInstants |
+| `kids-saying-yay-sound-effect_3.wav` | MyInstants |
+| `sad-meow-song.wav` | MyInstants |
+| `youre-not-that-guy*.wav` | MyInstants |
+
 ## License
 BSD 2-Clause
